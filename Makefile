@@ -14,7 +14,7 @@ cli:
 	  --user=33 \
 	  --env-file .env \
 	  --env WORDPRESS_WWW_HOST="${WORDPRESS_WWW_HOST}" \
-          --volume $(CURDIR):/tmp/host \
+          --volume $(CURDIR):/opt \
 	  --volumes-from ${WP_CONTAINER} \
 	  --network container:${WP_CONTAINER} \
 	  wordpress:cli sh
