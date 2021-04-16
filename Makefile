@@ -1,18 +1,22 @@
 #!/usr/bin/make -f
 SHELL=/bin/bash
-WORDPRESS_WWW_HOST=?wordpress-example.apps.ocp4.example.com
+WORDPRESS_WWW_HOST?=wordpress-example.apps.ocp4.example.com
+WP_CONTAINER?=wp-example_wp_1
+DB_CONTAINER?=wp-example_db_1
+CLI_CONTAINER?=wp-example_cli_1
 
 run:
 	docker-compose -f stack.yml up
 
 cli:
 	docker run -it --rm \
+          --name=${CLI_CONTAINER} \
 	  --user=33 \
 	  --env-file .env \
 	  --env WORDPRESS_WWW_HOST="${WORDPRESS_WWW_HOST}" \
           --volume $(CURDIR):/tmp/host \
-	  --volumes-from root_wp_1 \
-	  --network container:root_wp_1 \
+	  --volumes-from ${WP_CONTAINER} \
+	  --network container:${WP_CONTAINER} \
 	  wordpress:cli sh
 
 deploy:
