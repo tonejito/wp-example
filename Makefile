@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 SHELL=/bin/bash
-WORDPRESS_WWW_HOST=wordpress-example.apps.ocp4.example.com
+WORDPRESS_WWW_HOST=?wordpress-example.apps.ocp4.example.com
 
 run:
 	docker-compose -f stack.yml up
@@ -9,6 +9,7 @@ cli:
 	docker run -it --rm \
 	  --user=33 \
 	  --env-file .env \
+	  --env WORDPRESS_WWW_HOST="${WORDPRESS_WWW_HOST}" \
           --volume $(CURDIR):/tmp/host \
 	  --volumes-from root_wp_1 \
 	  --network container:root_wp_1 \
