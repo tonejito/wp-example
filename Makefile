@@ -9,6 +9,7 @@ cli:
 	docker run -it --rm \
 	  --user=33 \
 	  --env-file .env \
+          --volume $(CURDIR):/tmp/host \
 	  --volumes-from root_wp_1 \
 	  --network container:root_wp_1 \
 	  wordpress:cli sh
