@@ -6,7 +6,7 @@ DB_CONTAINER?=wp-example_db_1
 CLI_CONTAINER?=wp-example_cli_1
 
 run:
-	docker-compose -f stack.yml up
+	docker-compose up
 
 cli:
 	docker run -it --rm \
