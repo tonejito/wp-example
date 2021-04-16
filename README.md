@@ -1,0 +1,2 @@
+# wp-example
+WordPress example
