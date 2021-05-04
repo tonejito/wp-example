@@ -5,6 +5,13 @@ WP_CONTAINER?=wp-example_wp_1
 DB_CONTAINER?=wp-example_db_1
 CLI_CONTAINER?=wp-example_cli_1
 
+DOCKER?=docker
+TAG=quay.io/tonejito/wordpress:5.7-php7.4-apache
+
+build:
+	${DOCKER} build -t ${TAG} .
+	${DOCKER} push ${TAG}
+
 run:
 	docker-compose up
 
