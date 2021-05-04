@@ -6,6 +6,7 @@ version: '3.1'
 
 services:
 
+# https://github.com/docker-library/wordpress/blob/master/cli/php7.4/alpine/Dockerfile
 #   cli:
 #     image: wordpress:cli-2.4-php7.4
 #     restart: never
@@ -19,8 +20,10 @@ services:
 #     volumes:
 #       - wordpress:/var/www/html
 
+# https://github.com/docker-library/wordpress/blob/master/latest/php7.4/apache/Dockerfile
   wp:
-    image: wordpress:5.7-php7.4-apache
+    # image: wordpress:5.7-php7.4-apache
+    image: quay.io/tonejito/wordpress:5.7-php7.4-apache
     restart: always
     ports:
       - 8080:80
