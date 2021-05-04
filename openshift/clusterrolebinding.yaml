@@ -1,0 +1,32 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: system:openshift:scc:anyuid
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+subjects:
+- kind: ServiceAccount
+  name: mariadb
+  namespace: wordpress-example
+- kind: ServiceAccount
+  name: wordpress
+  namespace: wordpress-example
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: system:openshift:scc:restricted
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:restricted
+subjects:
+- kind: ServiceAccount
+  name: mariadb
+  namespace: wordpress-example
+- kind: ServiceAccount
+  name: wordpress
+  namespace: wordpress-example
