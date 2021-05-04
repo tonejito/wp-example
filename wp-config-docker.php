@@ -1,4 +1,5 @@
 <?php
+# https://github.com/docker-library/wordpress/blob/master/latest/php7.4/apache/wp-config-docker.php
 /**
  * The base configuration for WordPress
  *

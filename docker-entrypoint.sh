@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 echo ${@}
-set -Eeuovx pipefail
+# https://github.com/docker-library/wordpress/blob/master/latest/php7.4/apache/docker-entrypoint.sh
+set -Eeuo pipefail
 
 if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 	uid="$(id -u)"
