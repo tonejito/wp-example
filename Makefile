@@ -22,15 +22,15 @@ cli:
 deploy:
 	wp core install \
 	  --url=http://localhost \
-	  --title="Example WordPress" \
-	  --admin_user=admin \
-	  --admin_password=redhat \
-	  --admin_email=wordpress@localhost.local \
+	  --title="${WORDPRESS_TITLE}" \
+	  --admin_user="${WORDPRESS_USER}" \
+	  --admin_password="${WORDPRESS_PASSWORD}" \
+	  --admin_email="${WORDPRESS_EMAIL}" \
 	  --skip-email
 	wp maintenance-mode activate
+	wp option update home    "${WORDPRESS_URL}"
+	wp option update siteurl "${WORDPRESS_URL}"
 	wp theme install twentyseventeen --activate
-	wp option update home "http://${WORDPRESS_WWW_HOST}"
-	wp option update siteurl "http://${WORDPRESS_WWW_HOST}"
 	wp maintenance-mode deactivate
 	wp maintenance-mode status
 	wp core is-installed
