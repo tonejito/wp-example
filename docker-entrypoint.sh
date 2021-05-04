@@ -99,6 +99,7 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 
 	if [ -e wp-config.php ]
 	then
+		set +e
 		WP_ALLOW_ROOT=--allow-root
 		echo "Checking if WordPress is installed"
 		wp core is-installed ${WP_ALLOW_ROOT}
@@ -106,7 +107,6 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 		then
 			echo "WordPress is already installed"
 		else
-			set +e
 			echo "Installing WordPress with wpcli"
 			wp core install \
 			  --url="http://localhost" \
@@ -116,7 +116,6 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 			  --admin_email="${WORDPRESS_EMAIL}" \
 			  --skip-email \
 			  --no-color \
-			  --debug \
 			  ${WP_ALLOW_ROOT} \
 			;
 
