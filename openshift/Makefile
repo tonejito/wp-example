@@ -1,18 +1,23 @@
 #!/usr/bin/make -f
 SHELL=/bin/bash
 
+API_URL=https://api.ocp4.example.com:6443
+API_USER=admin
+API_PASS=redmat
+
+TIMEOUT=3m
 PROJECT=wordpress-example
 DEPLOYMENT_DB=mariadb
 DEPLOYMENT_WP=wordpress
-TIMEOUT=3m
+ENDPOINT_URL=https://${DEPLOYMENT_WP}-${PROJECT}.apps.ocp4.example.com/
 
-all:	clear login clean deploy logs
-
-login:
-	oc login -u admin -p redhat https://api.ocp4.example.com:6443
+all:	clear login clean deploy logs test
 
 clear:
 	@$@
+
+login:
+	oc login -u ${API_USER} -p ${API_PASS} ${API_URL}
 
 clean:
 	-oc delete project/${PROJECT}
@@ -32,3 +37,8 @@ deploy:	clusterrolebinding.yaml mariadb.yaml wordpress.yaml
 logs:
 	oc logs deployment/${DEPLOYMENT_DB}
 	oc logs deployment/${DEPLOYMENT_WP}
+
+test:
+	sleep 10
+	curl -vk#fSL '${ENDPOINT_URL}' | \
+	egrep --color=auto -e '</?title>|site-description'
